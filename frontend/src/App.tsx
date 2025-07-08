@@ -1,5 +1,5 @@
 import './index.css'
-import MovieCard from './components/MovieCard'
+import Library from './components/Library';
 
 function App() {
 
@@ -7,7 +7,7 @@ function App() {
     {
       id: 1,
       title: 'Duna: Parte Dois',
-      imageUrl: 'https://image.tmdb.org/t/p/w500/A0K03oB41wOq6t8rO4D620d4fR3.jpg', // Exemplo de imagem
+      imageUrl: 'https://image.tmdb.org/t/p/w500/A0K03oB41wOq6t8rO4D620d4fR3.jpg',
       rating: 8.5,
     },
     {
@@ -52,25 +52,11 @@ function App() {
       rating: 100.0,
     },
   ];
-
+  
   return (
-    <div className="pt-10">
-      <div className="px-40 flex-col h-screen">
-        <h1 className="text-2xl text-stone-800">My Library</h1>
-        <div className='flex justify-between items-center'>
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 md:grid-cols-4 mt-6">
-            {movies.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                imageUrl={movie.imageUrl}
-                title={movie.title}
-                rating={movie.rating}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    <Library
+      movies={movies}
+    />
   )
 }
 
