@@ -5,10 +5,10 @@ import App from './App.tsx'
 import NavBar from './components/NavBar.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <div className='bg-stone-200 min-h-screen'>
+  <div>
   <StrictMode>
     <NavBar />
     <App />
   </StrictMode>
-  </div>,
+  </div>
 )
