@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import MovieCard from './MovieCard';
 
 interface Movie {
-  id: number;
+  id: string; 
   title: string;
-  imageUrl: string;
-  rating: number;
+  imageUrl: string; 
+  rating: number; 
 }
 
 interface SearchProps {
