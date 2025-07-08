@@ -10,6 +10,8 @@ interface MovieCardProps {
   imageUrl: string;
   title: string;
   rating: number;
+  onAdd?: () => void;
+  isAdded?: boolean;
 }
 
 function MovieCard({ imageUrl, title, rating }: MovieCardProps) {

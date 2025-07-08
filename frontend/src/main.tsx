@@ -1,47 +1,47 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode, useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './index.css'
-import App from './App.tsx'
-import NavBar from './components/NavBar.tsx'
+import './index.css';
+import App from './App.tsx';
+import NavBar from './components/NavBar.tsx';
 import Library from './components/Library.tsx';
-import SearchMovie from './components/SearchMovie.tsx';
+import Search from './components/SearchMovie.tsx';
 
-const movies = [
-  {
-    id: 1,
-    title: 'Duna: Parte Dois',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/A0K03oB41wOq6t8rO4D620d4fR3.jpg',
-    rating: 8.5,
-  },
-  {
-    id: 2,
-    title: 'Oppenheimer',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/fm6KqXz3M2M1k3Cdz5wR9eJz1mQ.jpg',
-    rating: 8.3,
-  },
-  {
-    id: 3,
-    title: 'Interestelar',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/uxy2VfT0qY14d1XJg4c0Y1mY8jU.jpg',
-    rating: 8.6,
-  }, {
-    id: 4,
-    title: 'A Volta dos que Não Foram',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/uxy2VfT0qY14d1XJg4c0Y1mY8jU.jpg',
-    rating: 100.0,
-  }
-];
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<App />} /> 
-        <Route path="/movies" element={<SearchMovie movies={movies} />} /> 
-        <Route path="/my-library" element={<Library movies={movies} />} /> 
-      </Routes>
-    </Router>
-  </StrictMode>
-)
+interface Movie {
+  id: string;
+  title: string;
+  imageUrl: string;
+  rating: number; 
+}
+
+function Main() {
+  const [userLibrary, setUserLibrary] = useState<Movie[]>([]);
+
+  const addMovieToLibrary = (movieToAdd: Movie) => {
+    setUserLibrary((prevLibrary) => {
+      if (!prevLibrary.some(movie => movie.id === movieToAdd.id)) {
+        return [...prevLibrary, movieToAdd];
+      }
+      return prevLibrary;
+    });
+  };
+
+  return (
+    <StrictMode>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route
+            path="/movies"
+            element={<Search userLibrary={userLibrary} onAddMovie={addMovieToLibrary} />}
+          />
+          <Route path="/my-library" element={<Library movies={userLibrary} />} />
+        </Routes>
+      </Router>
+    </StrictMode>
+  );
+}
+
+createRoot(document.getElementById('root')!).render(<Main />);
