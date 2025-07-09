@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:13
+    container_name: moovy-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-moovydb}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data      
+volumes:
+  db-data:
