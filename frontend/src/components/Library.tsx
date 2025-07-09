@@ -9,10 +9,10 @@ interface Movie {
 
 interface LibraryProps {
   movies: Movie[];
-  onRemoveMovie: (movieId: string) => Promise<void>;
+  onRemoveMovie: (movieId: string) => void;
 }
 
-function Library({ movies }: { movies: { id: string; title: string; imageUrl: string; rating: number }[] }) {
+function Library({ movies, onRemoveMovie }: LibraryProps) {
   return (
     <div className="pt-10">
       <div className="px-40 flex-col h-screen">
@@ -28,7 +28,7 @@ function Library({ movies }: { movies: { id: string; title: string; imageUrl: st
                   title={movie.title}
                   rating={movie.rating}
                   onAdd={() => {}}
-                  onRemove={onRemoveMovie}
+                  onRemove={() => onRemoveMovie(movie.id)}
                   isAdded={true}
                 />
               ))

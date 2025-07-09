@@ -20,7 +20,7 @@ function Main() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch('http://localhost:3000/movies');
+        const response = await fetch('/movies');
         if (!response.ok) {
           throw new Error('Falha ao buscar filmes do backend.');
         }
@@ -35,7 +35,7 @@ function Main() {
 
   const addMovieToLibrary = async (movieToAdd: Movie) => {
     try {
-      const response = await fetch('http://localhost:3000/movies', {
+      const response = await fetch('/movies', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ function Main() {
 
   const removeMovieFromLibrary = async (movieId: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/movies/${movieId}`, {
+      const response = await fetch(`/movies/${movieId}`, {
         method: 'DELETE',
       });
 
