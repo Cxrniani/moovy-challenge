@@ -22,7 +22,7 @@ import { Movie } from './movies/movie.entity';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [Movie],
-        synchronize: false, 
+        synchronize: true, 
       }),
     }),
     MovieModule,
