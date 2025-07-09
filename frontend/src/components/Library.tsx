@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from './MovieCard';
 
 
-function Library({ movies }: { movies: { id: number; title: string; imageUrl: string; rating: number }[] }) {
+function Library({ movies }: { movies: { id: string; title: string; imageUrl: string; rating: number }[] }) {
   return (
         <div className="pt-10">
       <div className="px-40 flex-col h-screen">
