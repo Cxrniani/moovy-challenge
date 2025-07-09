@@ -7,10 +7,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 interface MovieCardProps {
+  key: string;
   imageUrl: string;
   title: string;
   rating: number;
-  onAdd?: () => void;
+  onAdd?: (movie: { id: string; title: string; imageUrl: string; rating: number }) => void;
+  onRemove?: (movieId: string) => void;
   isAdded?: boolean;
 }
 
