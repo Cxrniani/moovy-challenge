@@ -126,7 +126,7 @@ function Search({ userLibrary, onAddMovie }: SearchProps) {
                         {!loading && !error && searchedMovies.length > 0 ? (
                             searchedMovies.map((movie) => (
                                 <MovieCard
-                                    key={movie.id}
+                                    id={movie.id}
                                     imageUrl={movie.imageUrl}
                                     title={movie.title}
                                     rating={movie.rating}

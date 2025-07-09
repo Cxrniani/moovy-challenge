@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,20 +7,28 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 interface MovieCardProps {
-  key: string;
+  id: string;
   imageUrl: string;
   title: string;
   rating: number;
   onAdd?: (movie: { id: string; title: string; imageUrl: string; rating: number }) => void;
   onRemove?: (movieId: string) => void;
-  isAdded?: boolean;
+  isAdded: boolean;
 }
 
-function MovieCard({ imageUrl, title, rating }: MovieCardProps) {
-  const [isInMyList, setIsInMyList] = useState(false);
+function MovieCard({ id, imageUrl, title, rating, onAdd, onRemove, isAdded }: MovieCardProps) {
+  const [isInMyList, setIsInMyList] = useState(isAdded);
+
+  useEffect(() => {
+    setIsInMyList(isAdded);
+  }, [isAdded]);
 
   const handleToggleMyList = () => {
-    setIsInMyList((prev) => !prev);
+    if (isInMyList) {
+      onRemove?.(id);
+    } else {
+      onAdd?.({ id, title, imageUrl, rating });
+    }
   };
 return (
     <Card className="w-72 h-fit py-2 px-1 mx-auto my-4 shadow-xl shadow-black rounded-xl">
