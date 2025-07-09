@@ -1,15 +1,27 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:13
     container_name: moovy-postgres
     restart: always
-    environment:
-      POSTGRES_DB: ${DB_DATABASE:-moovydb}
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    env_file:
+      - ./.env
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data      
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: moovy-backend
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
 volumes:
-  db-data:
+  postgres_data:
