@@ -58,7 +58,7 @@ function Search({ userLibrary, onAddMovie }: SearchProps) {
                             let ratingValue = 0;
                             try {
                                 const detailResponse = await fetch(
-                                    `https://www.omdbapi.com/?s=${omdbMovie.imdbID}&apikey=${OMDB_API_KEY}`
+                                    `https://www.omdbapi.com/?i=${omdbMovie.imdbID}&apikey=${OMDB_API_KEY}`
                                 );
                                 const detailData = await detailResponse.json();
                                 if (detailData.Response === 'True' && detailData.imdbRating && detailData.imdbRating !== 'N/A') {
